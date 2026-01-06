@@ -4,5 +4,17 @@
     "concepto": "café",
     "monto": 20.0,
     "forma_pago": "efectivo"
+  },
+  {
+    "fecha": "2026-01-04",
+    "concepto": "rosca de reyes",
+    "monto": 100.0,
+    "forma_pago": "efectivo"
+  },
+  {
+    "fecha": "2026-01-05",
+    "concepto": "libro",
+    "monto": 70.0,
+    "forma_pago": "efectivo"
   }
 ]

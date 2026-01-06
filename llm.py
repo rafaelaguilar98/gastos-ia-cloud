@@ -29,7 +29,7 @@ Respuesta:
 """
 
 
-def interpretarMensaje(mensaje: str) -> str:
+def interpretarMensaje(mensaje: str) -> str: # Definir el tipo de dato que recibe y el que retorna
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
