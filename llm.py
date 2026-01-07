@@ -1,35 +1,15 @@
 from openai import OpenAI
 from datetime import date
+from pathlib import Path
 
 client = OpenAI()
 
-
-SYSTEM_PROMPT = f"""
-Eres un asistente que interpreta gastos personales.
-
-Devuelve SOLO JSON válido.
-
-Reglas:
-- accion: "registrar_gasto" o "consultar_total"
-- fecha: ISO (YYYY-MM-DD)
-- Si no se especifica fecha → usa hoy ({date.today().isoformat()})
-- forma_pago por defecto: "efectivo"
-- concepto: específico (uber, café, tacos)
-- monto: número
-
-Ejemplos:
-
-Usuario: Compré café por 20
-Respuesta:
-{{"accion":"registrar_gasto","fecha":"{date.today().isoformat()}","concepto":"café","monto":20,"forma_pago":"efectivo"}}
-
-Usuario: ¿Cuánto gasté este mes?
-Respuesta:
-{{"accion":"consultar_total"}}
-"""
-
+PROMPT_PATH = Path("prompts/gastos_system.txt")
+def cargar_system_prompt() -> str:
+    return PROMPT_PATH.read_text(encoding="utf-8")
 
 def interpretarMensaje(mensaje: str) -> str: # Definir el tipo de dato que recibe y el que retorna
+    SYSTEM_PROMPT = cargar_system_prompt()
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
